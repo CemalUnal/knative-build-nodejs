@@ -1,0 +1,17 @@
+apiVersion: build.knative.dev/v1alpha1
+kind: Build
+metadata:
+  name: nodejs-example
+  namespace: default
+spec:
+  serviceAccountName: nodejs-service-account
+  source:
+    git:
+      url: https://github.com/CemalUnal/knative-build-nodejs.git
+      revision: master
+  steps:
+  - name: build-and-push
+    image: gcr.io/kaniko-project/executor:v0.1.0
+    args:
+    - --dockerfile=/workspace/Dockerfile
+    - --destination=docker.io/cunal/firstrepo:latest

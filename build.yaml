@@ -1,0 +1,16 @@
+apiVersion: build.knative.dev/v1alpha1
+kind: Build
+metadata:
+  name: nodejs-example
+  namespace: default
+spec:
+  serviceAccountName: nodejs-service-account
+  source:
+    git:
+      url: https://github.com/CemalUnal/knative-build-nodejs.git
+      revision: master
+  template:
+    name: nodejs-example
+    arguments:
+    - name: IMAGE
+      value: cunal/knative-build-nodejs:latest
